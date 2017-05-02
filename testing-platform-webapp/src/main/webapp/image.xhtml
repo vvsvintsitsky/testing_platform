@@ -1,0 +1,36 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:c="http://java.sun.com/jsp/jstl/core"
+	xmlns:p="http://primefaces.org/ui">
+<f:view>
+	<h:head>
+		<title>Image Upload</title>
+	</h:head>
+	<h:body>
+		<h:form enctype="multipart/form-data">
+			<h:inputFile id="file" value="#{imageUploadBean.imageFile}" />
+			<h:commandButton id="submit" type="submit" value="Upload">
+				<f:ajax execute="file" listener="#{imageUploadBean.upload}"
+					render="upload_result" />
+			</h:commandButton>
+			<br />
+			<h:panelGroup id="upload_result">
+				<h:panelGroup rendered="#{imageUploadBean.imageFile!=null}">
+					<br />
+				Upload result
+				<br />
+				#{imageUploadBean.imageId}
+				<br />
+					<p:graphicImage value="#{imageUploadBean.loadedImage}">
+						<f:param name="imageName" value="#{imageUploadBean.imageId}" />
+					</p:graphicImage>
+				</h:panelGroup>
+			</h:panelGroup>
+		</h:form>
+	</h:body>
+</f:view>
+</html>

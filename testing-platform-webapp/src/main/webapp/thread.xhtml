@@ -1,0 +1,35 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:c="http://java.sun.com/jsp/jstl/core">
+<f:metadata>
+	<f:viewAction
+		action="#{rolePageBean.checkRole({cookie['Authentication'].value})}" />
+</f:metadata>
+<f:view>
+	<h:head>
+		<title>Thread page</title>
+	</h:head>
+	<h:body>
+		<h:panelGroup rendered="#{rolePageBean.role=='ADMIN'}">ADMIN TEXT</h:panelGroup>
+		<h:panelGroup rendered="#{rolePageBean.role=='USER'}">USER TEXT</h:panelGroup>
+		<h:panelGroup rendered="#{rolePageBean.role=='ANON'}">ANON TEXT</h:panelGroup>
+		<br />
+		<h:form>
+			<h:commandButton value="Execute Task" type="submit">
+				<f:ajax listener="#{rolePageBean.performTask()}"
+					render="thread_result" />
+			</h:commandButton>
+			<br/>
+			<h:panelGroup id="thread_result">
+				<h:panelGroup rendered="#{rolePageBean.result!=null}">#{rolePageBean.result}</h:panelGroup>
+			</h:panelGroup>
+		</h:form>
+
+	</h:body>
+</f:view>
+</html>
+

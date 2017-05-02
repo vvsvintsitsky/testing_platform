@@ -1,0 +1,28 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:c="http://java.sun.com/jsp/jstl/core"
+	xmlns:lang_select="http://java.sun.com/jsf/composite/components/localization">
+<f:view locale="#{localizationBean.language.locale}">
+	<h:head>
+		<title>Login page</title>
+	</h:head>
+	<h:body>
+		<lang_select:language_select localeBean="#{localizationBean}" />
+		<h:form>
+			<h:outputText value="#{lang['auth.loginLabel']}"></h:outputText>
+			<h:inputText id="email" value="#{loginBean.email}" />
+			<br />
+			<h:outputText value="#{lang['auth.passwordLabel']}"></h:outputText>
+			<h:inputSecret id="password" value="#{loginBean.password}" />
+			<br />
+			<h:commandButton id="submit" type="submit" value="Submit"
+				action="#{loginBean.authenticate}" />
+		</h:form>
+	</h:body>
+</f:view>
+</html>
+

@@ -1,0 +1,20 @@
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+	http://www.springframework.org/schema/beans/spring-beans-2.5.xsd">
+
+	<bean id="testingPlatformDataSource"
+		class="wsvintsitsky.testing_platform.datamodel.util.SchemaNameAwareBasicDataSource"
+		destroy-method="close">
+
+		<property name="driverClassName" value="${jdbc.driverClassName}" />
+		<property name="url" value="${jdbc.url}" />
+		<property name="username" value="${jdbc.username}"></property>
+		<property name="password" value="${jdbc.password}" />
+		<property name="schema" value="${jdbc.schema}" />
+		<property name="maxIdle" value="20" />
+		<property name="minIdle" value="5"/>
+		<property name="maxOpenPreparedStatements" value="180"/>
+	</bean>
+
+</beans>

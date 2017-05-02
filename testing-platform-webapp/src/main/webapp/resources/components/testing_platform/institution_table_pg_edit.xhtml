@@ -1,0 +1,49 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:c="http://java.sun.com/jsp/jstl/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:composite="http://java.sun.com/jsf/composite">
+
+<composite:interface>
+	<composite:attribute name="instTableBean"
+		type="wsvintsitsky.testing_platform.webapp.bean.InstitutionTableBean"></composite:attribute>
+	<composite:attribute name="pGroupBean"
+		type="wsvintsitsky.testing_platform.webapp.bean.PupilGroupEditBean"></composite:attribute>
+</composite:interface>
+
+<composite:implementation>
+	<h:dataTable id="institution_table"
+		value="#{cc.attrs.instTableBean.institutions}" var="inst"
+		styleClass="customization-table centered"
+		headerClass="customization-table-header"
+		rowClasses="customization-table-odd-row,customization-table-even-row">
+		<h:column>
+			<f:facet name="header">
+				<h:outputText value="#{lang['table.institutions.id']}" />
+			</f:facet>
+			<h:outputText value="#{inst.id}" />
+		</h:column>
+		<h:column>
+			<f:facet name="header">
+				<h:outputText value="#{lang['table.institutions.name']}" />
+			</f:facet>
+			<h:outputText value="#{inst.name}" />
+		</h:column>
+		<h:column>
+			<f:facet name="header">
+				<h:outputText value="#{lang['table.institutions.actions']}" />
+			</f:facet>
+			<h:form>
+				<h:commandButton type="submit"
+					value="#{lang['table.institutions.actions.select']}">
+					<f:setPropertyActionListener
+						target="#{cc.attrs.pGroupBean.institution}" value="#{inst}" />
+					<f:ajax render=":layer1" />
+				</h:commandButton>
+			</h:form>
+		</h:column>
+	</h:dataTable>
+</composite:implementation>
+</html>

@@ -1,0 +1,30 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:c="http://java.sun.com/jsp/jstl/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:composite="http://java.sun.com/jsf/composite">
+
+<composite:interface>
+	<composite:attribute name="localeBean"
+		type="wsvintsitsky.testing_platform.webapp.bean.LocalizationBean"></composite:attribute>
+</composite:interface>
+
+<composite:implementation>
+	<h:form>
+		<h:panelGrid columns="2">
+			<h:outputText value="#{lang['localization.language']}"></h:outputText>
+			<h:selectOneMenu value="#{cc.attrs.localeBean.language}"
+				converter="#{supportedLanguageConverter}">
+				<f:selectItems value="#{cc.attrs.localeBean.supportedLanguages}"
+					var="selected_language" itemLabel="#{selected_language.name()}"
+					itemValue="#{selected_language}" />
+				<f:ajax execute="@form"
+					listener="#{cc.attrs.localeBean.localeChanged}"
+					render="@all" />
+			</h:selectOneMenu>
+		</h:panelGrid>
+	</h:form>
+</composite:implementation>
+</html>

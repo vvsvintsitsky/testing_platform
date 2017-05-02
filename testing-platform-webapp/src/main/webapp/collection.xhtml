@@ -1,0 +1,48 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:c="http://java.sun.com/jsp/jstl/core">
+<f:view>
+	<h:head>
+		<title>Collection page</title>
+	</h:head>
+	<h:body>
+		<h:form>
+			<label>Type: </label>
+			<h:selectOneMenu value="#{collectionBean.collectionType}">
+				<f:selectItems value="#{collectionBean.collectionTypes}" var="type"
+					itemLabel="#{type.name}" itemValue="#{type.name}" />
+			</h:selectOneMenu>
+			<br />
+			<label>Size: </label>
+			<h:inputText value="#{collectionBean.collectionSize}" />
+			<br />
+			<label>Cycles: </label>
+			<h:inputText value="#{collectionBean.cycles}" />
+			<br />
+			<h:commandButton value="Generate Report">
+				<f:ajax execute="@form"
+					listener="#{collectionBean.generateReport()}"
+					render="report_result" />
+			</h:commandButton>
+			<br />
+			<h:panelGroup id="report_result">
+				<h:panelGroup
+					rendered="#{collectionBean.collectionType!=null and collectionBean.collectionSize!=null and collectionBean.cycles!=null}">
+					<h:panelGroup>
+						Creation time:	#{collectionBean.averageCreationTime} <br />
+						GetRandom time:	#{collectionBean.averageGetRandomTime} <br />
+						PutFirst time:	#{collectionBean.averagePutFirstTime} <br />
+						PutLast time:	#{collectionBean.averagePutLastTime} <br />
+						PutRandom time:	#{collectionBean.averagePutRandomTime} <br />
+					</h:panelGroup>
+				</h:panelGroup>
+			</h:panelGroup>
+		</h:form>
+	</h:body>
+</f:view>
+</html>
+
